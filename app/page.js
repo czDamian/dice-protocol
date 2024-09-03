@@ -1,7 +1,9 @@
+import Hero from "./landing/Hero";
+
 export default function Home() {
   return (
     <div>
-        Start Building from here
+    <Hero/>
     </div>
   );
 }
