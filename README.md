@@ -48,3 +48,4 @@ Dice protocol can leverage smart contracts, self-executing contracts with predef
 To implement this protocol, you would need to develop a blockchain network specifically designed for voting systems. This would involve building the blockchain infrastructure, creating smart contracts for various voting processes, and developing user-friendly interfaces for voters to interact with the system securely which we’ve got you covered.
 ## Advantages of DICE protocol
 **10x Cheaper:** Our solution is 10x cheaper, enhancing democracy by making voting accessible to all.
+**Reduced Costs:** save time and effort with Dice protocol’s streamlined processes and reduced operation cost. 
