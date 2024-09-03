@@ -1,8 +1,11 @@
+import About from "./landing/About";
+import Hero from "./landing/Hero";
 
 export default function Home() {
   return (
     <div>
-      Work Hard
+    <Hero/>
+    <About/>
     </div>
   );
 }
