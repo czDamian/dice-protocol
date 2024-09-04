@@ -21,7 +21,7 @@ export default function Hero() {
       <span>
         <span className="fixed z-20 top-[5%] right-[5%]">
           <MobileNavbar
-            links={["About", "Roadmap", "Contact"]}
+            links={["About", "Roadmap", "FAQ"]}
             btn={"Connect Wallet"}
           />
         </span>

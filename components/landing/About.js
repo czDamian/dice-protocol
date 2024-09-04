@@ -19,7 +19,10 @@ const feats = [
 ];
 export default function About() {
   return (
-    <div className="my-10 p-4 w-11/12 lg:w-3/4 mx-auto backdrop-blur-sm rounded-2xl bg-[#171521] md:p-[3%]">
+    <div
+      id={"About"}
+      className="scroll-smooth my-10 p-4 w-11/12 lg:w-3/4 mx-auto backdrop-blur-sm rounded-2xl bg-[#171521] md:p-[3%]"
+    >
       <div
         className="flex flex-col-reverse lg:flex-row justify-evenly gap-2 items-center mx-auto rounded-3xl p-12 lg:p-5 w-full bg-no-repeat bg-cover"
         style={{ backgroundImage: "url('/bg-about.png')" }}

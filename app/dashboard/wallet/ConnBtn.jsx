@@ -100,7 +100,7 @@ export const ConnBtn = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mt-20 md:mt-0">
       {loading ? (
         <button
           type="button"

@@ -6,8 +6,8 @@ import VotingMethodForm from "./ui/VotingMethodForm";
 const Dashboard = () => {
   return <div>
     <VotingList/>
-    <VotingForm/>
-    <VotingMethodForm/>
+    {/* <VotingForm/>
+    <VotingMethodForm/> */}
   </div>;
 };
 export default Dashboard;
