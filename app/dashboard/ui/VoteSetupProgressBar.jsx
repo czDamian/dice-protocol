@@ -14,6 +14,7 @@ const steps = [
 
 export default function VoteSetupProgressBar({ currentStep }) {
   const router = useRouter();
+
   const handleClose = (e) => {
     e.preventDefault();
     router.push("/dashboard");
@@ -24,9 +25,9 @@ export default function VoteSetupProgressBar({ currentStep }) {
       <div className="flex justify-end mb-6 mt-2">
         <button
           onClick={handleClose}
-          className="ml-4 px-4 py-2 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition duration-300 flex items-center">
-          Close form
-          <X className="ml-2" size={16} />
+          className="p-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 transition duration-300 flex items-center">
+          
+          <X size={20} />
         </button>
       </div>
 
@@ -39,13 +40,15 @@ export default function VoteSetupProgressBar({ currentStep }) {
                   <div
                     className={`w-12 h-12 rounded-full flex items-center justify-center ${
                       step.number < currentStep
-                        ? "bg-blue-500"
+                        ? "bg-blue-700 text-white"
                         : step.number === currentStep
-                        ? "bg-blue-400"
-                        : "bg-gray-700"
+                        ? "bg-blue-600 text-white"
+                        : "bg-blue-400 text-white"
                     }`}>
                     {step.number < currentStep ? (
-                      <Check className="text-white text-2xl p-2" size={20} />
+                      <span className="text-white text-2xl p-2">
+                        {step.number}
+                      </span>
                     ) : (
                       <span className="text-white text-2xl p-2">
                         {step.number}
@@ -59,7 +62,7 @@ export default function VoteSetupProgressBar({ currentStep }) {
                 {index < steps.length - 1 && (
                   <div
                     className={`flex-1 h-0.5 ${
-                      index < currentStep - 1 ? "bg-blue-500" : "bg-gray-700"
+                      index < currentStep - 1 ? "bg-blue-400" : "bg-gray-700"
                     }`}
                   />
                 )}

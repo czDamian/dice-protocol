@@ -1,11 +1,9 @@
-import VotingForm from "../ui/VotingForm";
-import VoteSetupProgressBar from "../ui/VoteSetupProgressBar";
+import MultistepVotingForm from "../ui/MultistepVotingForm";
 
 const NewVote = () => {
   return (
     <div className="my-4">
-      <VoteSetupProgressBar />
-      <VotingForm />
+      <MultistepVotingForm/>
     </div>
   );
 };

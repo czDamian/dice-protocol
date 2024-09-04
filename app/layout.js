@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+// Initialize the Inter font
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Dice Protocol",

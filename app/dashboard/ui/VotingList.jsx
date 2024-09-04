@@ -24,7 +24,6 @@ const VotingList = () => {
       if (userInfo) {
         try {
           const { id } = JSON.parse(userInfo);
-          const { id } = JSON.parse(userInfo);
           const response = await fetch(`/api/create-organization?id=${id}`);
           const data = await response.json();
           if (response.ok) {

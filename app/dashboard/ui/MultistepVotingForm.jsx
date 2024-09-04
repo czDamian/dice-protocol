@@ -3,8 +3,14 @@ import { useState } from "react";
 import VotingForm from "./VotingForm";
 import VotingMethodForm from "./VotingMethodForm";
 import VoteSetupProgressBar from "./VoteSetupProgressBar";
+import VoteOptionsForm from "./VoteOptionsForm";
+import VoteSecuritySettings from "./VoteSecuritySettings";
+import VoteConfirmationPage from "./VoteConfirmationPage";
+import { useRouter } from "next/navigation";
+import { UserPen } from "lucide-react";
 
 const MultistepVotingForm = () => {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     proposalTitle: "",
@@ -12,14 +18,16 @@ const MultistepVotingForm = () => {
     startDate: "",
     endDate: "",
     votingMethod: "",
-    anonymousVoting: true,
     showRealTimeResults: true,
+    users: [], // Initialize users array
   });
 
+  // Handle input changes and update form data
   const handleChange = (newData) => {
     setFormData((prev) => ({ ...prev, ...newData }));
   };
 
+  // Handle next step navigation after validating the data
   const handleNext = (stepData) => {
     if (validateStepData(stepData)) {
       handleChange(stepData);
@@ -29,10 +37,12 @@ const MultistepVotingForm = () => {
     }
   };
 
+  // Handle previous step navigation
   const handlePrevious = () => {
     setCurrentStep((prev) => prev - 1);
   };
 
+  // Validate data for each step (customize this according to the form requirements)
   const validateStepData = (stepData) => {
     if (currentStep === 1) {
       return (
@@ -48,19 +58,41 @@ const MultistepVotingForm = () => {
     return true;
   };
 
-  const handleFinalSubmit = () => {
+  // Final submit to the database after all steps are completed
+  const handleFinalSubmit = async () => {
     console.log("Submitting all data:", formData);
-    // Send the data to the database or API here
+    try {
+      const response = await fetch(
+        `/api/voting-process/66d847fee1cee10ed0a67ae2`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const result = await response.json();
+      console.log("API Response:", result);
+
+      if (response.ok) {
+        alert("Voting created successfully!");
+        router.push("/dashboard");
+      } else {
+        alert(`Error: ${result.error || "Failed to create voting"}`);
+      }
+    } catch (error) {
+      console.error("Error submitting voting data:", error);
+      alert("An error occurred while creating the voting process.");
+    }
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="bg-gray-900">
       <VoteSetupProgressBar currentStep={currentStep} />
       {currentStep === 1 && (
-        <VotingForm 
-          onNext={handleNext} 
-          formData={formData} 
-        />
+        <VotingForm onNext={handleNext} formData={formData} />
       )}
       {currentStep === 2 && (
         <VotingMethodForm
@@ -69,14 +101,27 @@ const MultistepVotingForm = () => {
           formData={formData}
         />
       )}
+      {currentStep === 3 && (
+        <VoteOptionsForm
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          formData={formData}
+        />
+      )}
+      {currentStep === 4 && (
+        <VoteSecuritySettings
+          onNext={handleNext}
+          onPrevious={handlePrevious}
+          formData={formData}
+          setFormData={setFormData} // Pass setFormData to handle CSV data
+        />
+      )}
       {currentStep === 5 && (
-        <div className="flex items-center justify-center">
-          <button
-            onClick={handleFinalSubmit}
-            className="py-3 px-6 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-md shadow-lg hover:opacity-90 transition-opacity duration-300">
-            Submit All Data
-          </button>
-        </div>
+        <VoteConfirmationPage
+          onNext={handleFinalSubmit}
+          onPrevious={handlePrevious}
+          formData={formData}
+        />
       )}
     </div>
   );

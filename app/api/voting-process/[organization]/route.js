@@ -1,3 +1,4 @@
+// app\api\voting-process\[organization]\route.js
 import { NextResponse } from "next/server";
 import connectDb from "@/lib/mongodb";
 import Voting from "@/models/VotingProcess";
@@ -10,25 +11,34 @@ export async function POST(request, { params }) {
   const { organization: organizationId } = params;
 
   const {
-    title,
+    proposalTitle,
+    proposalDescription,
+    startDate,
+    endDate,
+    votingMethod,
+    voteMethod,
+    question,
     description,
-    startTime,
-    endTime,
-    voteType,
-    questions,
-    isEligible,
-    maxOptionsPerQuestion, // Include this in the request
+    options,
+    walletAuthentication,
+    decentralizedID,
+    multiSignatureVoting,
+    anonymousVoting,
+    showRealTimeResults,
+    users, // Added users field
   } = await request.json();
 
   const missingFields = [];
   if (!organizationId) missingFields.push("organizationId");
-  if (!title) missingFields.push("title");
-  if (!description) missingFields.push("description");
-  if (!startTime) missingFields.push("startTime");
-  if (!endTime) missingFields.push("endTime");
-  if (!voteType) missingFields.push("voteType");
-  if (!questions) missingFields.push("questions");
-  if (!isEligible) missingFields.push("isEligible");
+  if (!proposalTitle) missingFields.push("proposalTitle");
+  if (!proposalDescription) missingFields.push("proposalDescription");
+  if (!startDate) missingFields.push("startDate");
+  if (!endDate) missingFields.push("endDate");
+  if (!votingMethod) missingFields.push("votingMethod");
+  if (!question) missingFields.push("question");
+  if (!options || !Array.isArray(options) || options.length < 2) {
+    missingFields.push("options (at least two)");
+  }
 
   if (missingFields.length > 0) {
     return NextResponse.json(
@@ -38,42 +48,40 @@ export async function POST(request, { params }) {
   }
 
   try {
-    if (title.length < 10) {
+    if (proposalTitle.length < 10) {
       return NextResponse.json(
-        { error: "Title is too short" },
-        { status: 400 }
-      );
-    }
-
-    // Ensure `questions` is properly formatted
-    if (
-      !Array.isArray(questions) ||
-      questions.some(
-        (q) =>
-          !q.title ||
-          !q.description ||
-          !q.options ||
-          typeof q.options !== "object"
-      )
-    ) {
-      return NextResponse.json(
-        { error: "Invalid questions format" },
+        { error: "Proposal title is too short" },
         { status: 400 }
       );
     }
 
     // Create a new voting mechanism
     const voting = new Voting({
-      title,
-      description,
-      startTime,
-      endTime,
-      voteType,
-      questions,
-      isEligible,
+      proposalTitle,
+      proposalDescription,
+      startTime: new Date(startDate),
+      endTime: new Date(endDate),
+      voteMethod,
+      votingMethod,
+      questions: [
+        {
+          title: question,
+          description,
+          options: options.map((opt) => ({ text: opt })),
+        },
+      ],
+      securitySettings: {
+        walletAuthentication,
+        decentralizedID,
+        multiSignatureVoting,
+        anonymousVoting,
+      },
+      showRealTimeResults,
       organization: organizationId,
       votes: [],
-      maxOptionsPerQuestion: maxOptionsPerQuestion || 1, // Default to 1 if not provided
+      isEligible: {
+        users: users || [], // Ensure users field is initialized
+      },
     });
 
     await voting.save();
@@ -99,6 +107,7 @@ export async function GET(request, { params }) {
     const votings = await Voting.find({
       organization: organizationId,
     }).populate("organization");
+
     return NextResponse.json({ votings }, { status: 200 });
   } catch (err) {
     console.error("Error fetching voting:", err);
@@ -141,7 +150,7 @@ export async function PATCH(request, { params }) {
     }
 
     // Validate the maximum options per question based on vote type
-    if (voting.voteType === "single" && selectedOptions.length > 1) {
+    if (voting.votingMethod === "single-choice" && selectedOptions.length > 1) {
       return NextResponse.json(
         { error: "Only one option can be selected for single choice voting" },
         { status: 400 }
@@ -149,7 +158,7 @@ export async function PATCH(request, { params }) {
     }
 
     if (
-      voting.voteType === "multiple" &&
+      voting.votingMethod === "multiple-choice" &&
       selectedOptions.length > voting.maxOptionsPerQuestion
     ) {
       return NextResponse.json(
@@ -176,10 +185,11 @@ export async function PATCH(request, { params }) {
 
     // Update vote counts for selected options
     selectedOptions.forEach((optionId) => {
-      if (question.options.has(optionId)) {
-        const option = question.options.get(optionId);
+      const option = question.options.find(
+        (opt) => opt._id.toString() === optionId
+      );
+      if (option) {
         option.voteCount += 1;
-        question.options.set(optionId, option);
       }
     });
 
@@ -187,7 +197,7 @@ export async function PATCH(request, { params }) {
     voting.votes.push({
       userId,
       questionId,
-      optionIds: selectedOptions, // Store all selected options
+      optionIds: selectedOptions,
     });
 
     await voting.save();
@@ -204,19 +214,3 @@ export async function PATCH(request, { params }) {
     );
   }
 }
-
-
-// [
-//   {
-//     votingId: "MULTI_VOTING_ID", // Replace with the actual voting ID for the multiple-choice voting process
-//     questionId: "MULTI_QUESTION_ID", // Replace with the actual question ID for the multiple-choice question
-//     selectedOptions: ["vscode", "intellij"], // IDs of the options you are voting for
-//     userId: "USER_ID_1", // Replace with the actual user ID
-//   },
-//   {
-//     votingId: "SINGLE_VOTING_ID", // Replace with the actual voting ID for the single-choice voting process
-//     questionId: "SINGLE_QUESTION_ID", // Replace with the actual question ID for the single-choice question
-//     selectedOptions: ["csharp"], // ID of the last option you are voting for in the single-choice
-//     userId: "USER_ID_2", // Replace with the actual user ID
-//   },
-// ];

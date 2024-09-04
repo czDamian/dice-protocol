@@ -19,22 +19,23 @@ const OrganizationDetails = ({ organization, setShowModal }) => {
           alt={organization.name}
           width={1000}
           height={1000}
-          className="w-24"
+          className="w-48"
           onError={(e) => {
             e.target.src = "/logo.png";
           }}
         />
         <div className="flex flex-col">
-          <h2 className="text-xl font-bold uppercase">{organization.name}</h2>
-          <p className="italics text-sm">{organization.description}</p>
+          <h2 className="text-2xl mb-6 font-bold uppercase">{organization.name}</h2>
+          <p className="italics text-lg text-gray-300">{organization.description}</p>
         </div>
       </div>
-
-      <Button
-        extra="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold text-black mx-auto text-black"
-        onClick={handleCreateVoting}>
-        Create Voting
-      </Button>
+      <div className="mx-auto my-8 text-center">
+        <Button
+          extra="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold text-black mx-auto text-black"
+          onClick={handleCreateVoting}>
+          Create Voting
+        </Button>
+      </div>
     </div>
   );
 };
