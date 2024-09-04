@@ -30,47 +30,48 @@ export async function POST(request) {
 
   const upperCaseWalletAddress = walletAddress.toUpperCase();
 
-  try {
-    let user = await User.findOne({ walletAddress: upperCaseWalletAddress });
-    if (user) {
-      console.log("user logged in as:", walletAddress);
-      return NextResponse.json(
-        { message: "Login Successful" },
-        { status: 200 }
-      );
-    }
-
-    if (
-      upperCaseWalletAddress.length < 30 ||
-      upperCaseWalletAddress.length > 50 ||
-      !upperCaseWalletAddress.startsWith("0X")
-    ) {
-      console.log("invalid wallet address:", upperCaseWalletAddress);
-      return NextResponse.json(
-        { error: "Invalid ERC wallet" },
-        { status: 400 }
-      );
-    }
-
-    user = new User({
-      walletAddress: upperCaseWalletAddress,
-      ip,
-      browser,
-      os,
-      device,
-      referer,
-    });
-
-    await user.save();
-
+try {
+  let user = await User.findOne({ walletAddress: upperCaseWalletAddress });
+  if (user) {
+    console.log("user logged in as:", walletAddress);
     return NextResponse.json(
-      { message: "Voter registered successfully", user },
-      { status: 201 }
+      {
+        message: "Login Successful",
+        address: user.walletAddress,
+        id: user._id,
+      },
+      { status: 200 }
     );
-  } catch (err) {
-    console.error("Error registering user:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
   }
+
+  if (
+    upperCaseWalletAddress.length < 30 ||
+    upperCaseWalletAddress.length > 50 ||
+    !upperCaseWalletAddress.startsWith("0X")
+  ) {
+    console.log("invalid wallet address:", upperCaseWalletAddress);
+    return NextResponse.json({ error: "Invalid ERC wallet" }, { status: 400 });
+  }
+
+  user = new User({
+    walletAddress: upperCaseWalletAddress,
+    ip,
+    browser,
+    os,
+    device,
+    referer,
+  });
+
+  await user.save();
+
+  return NextResponse.json(
+    { message: "Voter registered successfully", user },
+    { status: 201 }
+  );
+} catch (err) {
+  console.error("Error registering user:", err);
+  return NextResponse.json({ error: err.message }, { status: 500 });
+}
 }
 
 export async function GET(request) {

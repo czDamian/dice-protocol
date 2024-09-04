@@ -1,13 +1,17 @@
 "use client";
-
-import * as React from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { config } from "@/app/wagmi";
+import { mainnet, polygon, optimism, arbitrum, base } from "wagmi/chains";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
+const config = getDefaultConfig({
+  appName: "Dice Protocol",
+  projectId: "24911ae43d4f2f85e9408da2d8c99868",
+  chains: [mainnet, polygon, optimism, arbitrum, base],
+  ssr: true, 
+});
 const queryClient = new QueryClient();
-
 export function Providers({ children }) {
   return (
     <WagmiProvider config={config}>

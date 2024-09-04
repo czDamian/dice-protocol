@@ -54,14 +54,44 @@ export async function POST(request) {
   }
 }
 
-export async function GET() {
-  let orgs = await Organization.find();
-  if (orgs) {
-    return NextResponse.json({ organizations: orgs }, { status: 200 });
+export async function GET(request) {
+  const id = request.nextUrl.searchParams.get("id");
+
+  if (id) {
+    try {
+      let org = await Organization.findOne({ owner: id });
+      if (org) {
+        return NextResponse.json({ org }, { status: 200 });
+      } else {
+        return NextResponse.json(
+          { message: "No organization found for this user" },
+          { status: 404 }
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching organization:", error);
+      return NextResponse.json(
+        { message: "Internal Server Error", error: error.message },
+        { status: 500 }
+      );
+    }
   } else {
-    return NextResponse.json(
-      { message: "No organization found" },
-      { status: 400 }
-    );
+    try {
+      let orgs = await Organization.find();
+      if (orgs.length > 0) {
+        return NextResponse.json({ organizations: orgs }, { status: 200 });
+      } else {
+        return NextResponse.json(
+          { message: "No organizations found" },
+          { status: 404 }
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching organizations:", error);
+      return NextResponse.json(
+        { message: "Internal Server Error", error: error.message },
+        { status: 500 }
+      );
+    }
   }
 }

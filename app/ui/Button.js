@@ -1,8 +1,8 @@
-function Button({ extra, children}) {
+function Button({ extra, children, onClick}) {
   return (
     <button
       className={`py-3 px-6 rounded-full ${extra}`}
-    //   onClick={() => onClick()}
+      onClick={onClick}
     >
       {children}
     </button>
