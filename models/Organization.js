@@ -1,12 +1,10 @@
-//model for registering organizations
-
 import mongoose from "mongoose";
 
 const organizationSchema = new mongoose.Schema(
   {
-    imgLink: { type: String, required: true },
-    name: { type: String, required: true, unique: true },
-    description: { type: String, required: true },
+    imgLink: { type: String, required: true, minlength: 20 },
+    name: { type: String, required: true, unique: true, minlength: 3 },
+    description: { type: String, required: true, minlength: 30 },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,

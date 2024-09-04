@@ -25,7 +25,7 @@ const VotingSchema = new mongoose.Schema(
     endTime: Date,
     voteType: {
       type: String,
-      enum: ["single", "multiple"], // Ensures valid vote types
+      enum: ["single", "multiple"],
       required: true,
     },
     questions: [QuestionSchema],
