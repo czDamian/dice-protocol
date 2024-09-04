@@ -3,26 +3,20 @@ import Image from "next/image";
 import Button from "../ui/Button";
 import Link from "next/link";
 import Nav, { MobileNav } from "./Nav";
-import { Source_Serif_4 } from "next/font/google";
+import { source } from "../fonts/fonts";
 import { FaRegStar } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
 import clsx from "clsx";
 import { useState } from "react";
 
-const source = Source_Serif_4({ subsets: ["latin"] });
-
 export default function Hero() {
-  const [isOpen, setIsOpen] = useState(false);
-  function handleToggle() {
-    setIsOpen((isOpen) => !isOpen);
-  }
-  console.log("Current isOpen state:", isOpen);
+ 
   return (
     <div
       className="bg-no-repeat bg-cover w-screen"
       style={{ backgroundImage: "url('/bg.png')", backgroundPosition: "" }}
     >
-      <Nav />{" "}
+      <Nav />
       <Link href="./" className="absolute left-[6%] top-[5%] md:block hidden">
         <Image src="/logo.png" alt="Logo" width={24} height={24} />
       </Link>
@@ -31,13 +25,7 @@ export default function Hero() {
           <Image src="/logo.png" alt="Logo" width={24} height={24} />
         </Link>
         <Button
-          extra={"md:hidden block text-[2.5rem] absolute right-[-1%] top-[4%]"}
-        //   onClick={() => {
-        //     handleToggle();
-        //     console.log("ghjkghjkghj");
-        //     console.log("isOpen:", isOpen);
-        //   }}
-        >
+          extra={"md:hidden block text-[2.5rem] absolute right-[-1%] top-[4%]"}>
           {" "}
           <RiMenu2Fill />{" "}
         </Button>
@@ -49,7 +37,7 @@ export default function Hero() {
             <FaRegStar className="mr-1" /> The most reliable voting dApp
           </p>
           <h1
-            className={` ${source.className} antialiased md:text-6xl text-5xl md:w-[20ch] font-semibold my-8 bg-gradient-to-r from-[#64626C] to-[#EEEBF9] bg-clip-text`}
+            className={` ${source.className} antialiased md:text-6xl text-5xl md:w-[20ch] font-semibold my-8 bg-gradient-to-r from-[#64626C] to-[#EEEBF9] bg-clip-text text-transparent`}
           >
             Decentralized Voting for Fair Community Governance
           </h1>
