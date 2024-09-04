@@ -4,12 +4,12 @@ BY TEAM WEB3 TITANS
   DICE PROTOCOL is a simple voting dapp where users can vote anonymously. Each vote is represented on the chain as a transaction making it immutable and tamper-proof. This protocol leverage on the blockchain which allows anyone to verify the integrity of voting process, ensuring trust in the system.
   ## Team Information
   1. **Onuigbo Kelechi:** Project Manager
-  2. **Kodjre Labore:** Smart contract Developer
+  2. **Kodjro Labore:** Smart contract Developer
   3. **Damian:** Backend Developer
   4. **Solomon:** Frontend Developer
   5. **Kudirat Ijeoma:** UI/UX Designer
 ## Slides
-[canva]
+[https://www.canva.com/design/DAGPdCgjTW0/ywIgFVCkXs8niU9e7bpjww/edit?utm_content=DAGPdCgjTW0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton]
 ## Table of Contents
 1. Project Overview
 2. Features
