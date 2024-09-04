@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import { source } from "../fonts/fonts";
+import { source } from "../../app/fonts/fonts";
 import clsx from "clsx";
 
 const steps = [

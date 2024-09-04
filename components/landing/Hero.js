@@ -1,20 +1,17 @@
 "use client";
 import Image from "next/image";
-import Button from "../ui/Button";
+import Button from "../../app/ui/Button";
 import Link from "next/link";
 import Nav, { MobileNav } from "./Nav";
-import { source } from "../fonts/fonts";
+import { source } from "../../app/fonts/fonts";
 import { FaRegStar } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
-import clsx from "clsx";
-import { useState } from "react";
 
 export default function Hero() {
- 
   return (
     <div
       className="bg-no-repeat bg-cover w-screen"
-      style={{ backgroundImage: "url('/bg.png')", backgroundPosition: "" }}
+      style={{ backgroundImage: "url('/bg.png')" }}
     >
       <Nav />
       <Link href="./" className="absolute left-[6%] top-[5%] md:block hidden">
@@ -25,7 +22,8 @@ export default function Hero() {
           <Image src="/logo.png" alt="Logo" width={24} height={24} />
         </Link>
         <Button
-          extra={"md:hidden block text-[2.5rem] absolute right-[-1%] top-[4%]"}>
+          extra={"md:hidden block text-[2.5rem] absolute right-[-1%] top-[4%]"}
+        >
           {" "}
           <RiMenu2Fill />{" "}
         </Button>
@@ -34,6 +32,7 @@ export default function Hero() {
       <div className=" lg:p-20 md:pt-[15%] pt-[25%] mx-auto flex flex-col lg:flex-row justify-evenly items-center text-stone-300 overflow-hidden">
         <div className="flex flex-col lg:items-start items-center text-center lg:text-left justify-between w-[40ch] md:w-[60ch] text-base">
           <p className="mb-5 text-sm flex flex-row items-center">
+            <FaRegStar className="mr-1" /> The most reliable voting dApp
             <FaRegStar className="mr-1" /> The most reliable voting dApp
           </p>
           <h1
