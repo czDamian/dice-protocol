@@ -20,7 +20,10 @@ const Search = () => {
         <FaRegBell className="text-2xl lg:text-3xl" />
         <IoIosSettings className="text-3xl lg:text-4xl" />
       </div>
-      <MobileNavbar />
+      <MobileNavbar
+        links={["Community", "Analytics", "Help", "Notifications", "Settings"]}
+        btn={"Create Vote"}
+      />
     </>
   );
 };

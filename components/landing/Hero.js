@@ -2,10 +2,11 @@
 import Image from "next/image";
 import Button from "../../app/ui/Button";
 import Link from "next/link";
-import Nav, { MobileNav } from "./Nav";
+import Nav from "./Nav";
 import { source } from "../../app/fonts/fonts";
 import { FaRegStar } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
+import MobileNavbar from "@/app/dashboard/ui/MobileNavbar";
 
 export default function Hero() {
   return (
@@ -17,18 +18,19 @@ export default function Hero() {
       <Link href="./" className="absolute left-[6%] top-[5%] md:block hidden">
         <Image src="/logo.png" alt="Logo" width={24} height={24} />
       </Link>
-      <span className="md:hidden block sticky top-[1%] w-full backdrop-blur-sm bg-red-500">
-        <Link href="./" className="absolute left-[6%] mt-5">
-          <Image src="/logo.png" alt="Logo" width={24} height={24} />
-        </Link>
-        <Button
-          extra={"md:hidden block text-[2.5rem] absolute right-[-1%] top-[4%]"}
-        >
-          {" "}
-          <RiMenu2Fill />{" "}
-        </Button>
+      <span>
+        <span className="fixed z-20 top-[5%] right-[5%]">
+          <MobileNavbar
+            links={["About", "Roadmap", "Contact"]}
+            btn={"Connect Wallet"}
+          />
+        </span>
+        <span className="md:hidden block fixed z-10 top-[2%] w-full backdrop-blur-sm bg-white">
+          <Link href="./" className="absolute left-[6%] mt-5">
+            <Image src="/logo.png" alt="Logo" width={24} height={24} />
+          </Link>
+        </span>
       </span>
-      <MobileNav />
       <div className=" lg:p-20 md:pt-[15%] pt-[25%] mx-auto flex flex-col lg:flex-row justify-evenly items-center text-stone-300 overflow-hidden">
         <div className="flex flex-col lg:items-start items-center text-center lg:text-left justify-between w-[40ch] md:w-[60ch] text-base">
           <p className="mb-5 text-sm flex flex-row items-center">

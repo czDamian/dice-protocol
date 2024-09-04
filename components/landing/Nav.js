@@ -29,28 +29,3 @@ export default function Nav() {
     </>
   );
 }
-
-export function MobileNav() {
-  <nav
-    className={clsx(
-      "w-[100vw] h-[100vh] backdrop-blur-sm absolute bg-red-500"
-      //   isOpen && "block",
-      //   !isOpen && "hidden"
-    )}
-  >
-    <ul className="list-none flex md:px-4 md:py-5 py-3 px-2 justify-between">
-      {links.map((link) => (
-        <li className="md:mx-3 mx-1" key={link.text}>
-          <Link href={link.url}>
-            <span>{link.text}</span>
-          </Link>
-        </li>
-      ))}
-    </ul>
-    <Button
-      extra={"bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700"}
-    >
-      <span> Connect Wallet</span>
-    </Button>
-  </nav>;
-}

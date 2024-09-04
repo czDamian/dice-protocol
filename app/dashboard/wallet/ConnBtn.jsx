@@ -45,7 +45,7 @@ export const ConnBtn = () => {
           }
 
           const data = await response.json();
-          Cookies.set("userInfo", JSON.stringify(data)); 
+          Cookies.set("userInfo", JSON.stringify(data));
         } catch (apiError) {
           console.error("Error during API request:", apiError);
           setAccount(null);
@@ -105,14 +105,16 @@ export const ConnBtn = () => {
         <button
           type="button"
           className="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold rounded-full py-3 px-6"
-          disabled>
+          disabled
+        >
           Connecting...
         </button>
       ) : (
         <button
           onClick={account ? disconnectWallet : connectWallet}
           type="button"
-          className="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold rounded-full py-3 px-6">
+          className="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold rounded-full py-3 px-6"
+        >
           {account
             ? `Disconnect (${account.slice(0, 6)}...${account.slice(-4)})`
             : "Connect Wallet"}

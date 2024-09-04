@@ -21,7 +21,7 @@ const VotingList = () => {
 
       if (userInfo) {
         try {
-          const { id } = JSON.parse(userInfo); 
+          const { id } = JSON.parse(userInfo);
           const response = await fetch(`/api/create-organization?id=${id}`);
           const data = await response.json();
           console.log(data.org, "org");
@@ -121,12 +121,13 @@ const VotingList = () => {
             className="mx-auto"
           />
           <p className="text-center text-sm">
-            It looks like there aren't any votes at the moment. But don't worry,
-            you can create your own
+            It looks like there aren&apos;t any votes at the moment. But
+            don&apos;t worry, you can create your own
           </p>
           <Button
             extra="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold text-black mx-auto text-black"
-            onClick={() => setShowModal(true)}>
+            onClick={() => setShowModal(true)}
+          >
             <span>Create Organization</span>
           </Button>
         </div>
@@ -134,7 +135,7 @@ const VotingList = () => {
         <div className=" rounded-xl p-2 my-8">
           <h1 className="font-bold mb-6 text-2xl">My Organization</h1>
           <div className="flex justify-start gap-6 md:gap-12 items-center">
-            <img
+            <Image
               src={organization.imgLink || "/logo.png"}
               alt={organization.name}
               width={1000}
@@ -188,12 +189,14 @@ const VotingList = () => {
             <div className="flex justify-between mt-4">
               <Button
                 extra="bg-gray-800 text-white"
-                onClick={() => setShowModal(false)}>
+                onClick={() => setShowModal(false)}
+              >
                 Cancel
               </Button>
               <Button
                 extra="bg-white text-black font-bold"
-                onClick={createOrganization}>
+                onClick={createOrganization}
+              >
                 Create
               </Button>
             </div>

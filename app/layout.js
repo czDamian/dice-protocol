@@ -1,7 +1,6 @@
 import { inter } from "./fonts/fonts";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Dice Protocol",
