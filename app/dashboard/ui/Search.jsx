@@ -2,6 +2,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaRegBell } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
 import MobileNavbar from "./MobileNavbar";
+import Button from "@/app/ui/Button";
 
 const Search = () => {
   return (
@@ -20,7 +21,26 @@ const Search = () => {
         <FaRegBell className="text-2xl lg:text-3xl" />
         <IoIosSettings className="text-3xl lg:text-4xl" />
       </div>
-      <MobileNavbar />
+      <span className="top-[5%] block md:hidden border-2">
+        <MobileNavbar
+          links={[
+            "Community",
+            "Analytics",
+            "Help",
+            "Notifications",
+            "Settings",
+          ]}
+          btn={
+            <Button
+              extra={
+                "bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold text-black"
+              }
+            >
+              <span>Create Vote</span>
+            </Button>
+          }
+        />
+      </span>
     </>
   );
 };

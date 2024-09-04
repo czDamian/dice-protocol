@@ -24,6 +24,7 @@ const VotingList = () => {
       if (userInfo) {
         try {
           const { id } = JSON.parse(userInfo);
+          const { id } = JSON.parse(userInfo);
           const response = await fetch(`/api/create-organization?id=${id}`);
           const data = await response.json();
           if (response.ok) {
@@ -122,12 +123,13 @@ const VotingList = () => {
             className="mx-auto"
           />
           <p className="text-center text-sm">
-            It looks like there aren't any votes at the moment. But don't worry,
-            you can create your own
+            It looks like there aren&apos;t any votes at the moment. But
+            don&apos;t worry, you can create your own
           </p>
           <Button
             extra="bg-gradient-to-r from-[#E5760E] to-[#F68CFF] text-stone-700 font-bold text-black mx-auto text-black"
-            onClick={() => setShowModal(true)}>
+            onClick={() => setShowModal(true)}
+          >
             <span>Create Organization</span>
           </Button>
         </div>

@@ -22,7 +22,7 @@ const steps = [
 ];
 export default function Steps() {
   return (
-    <div className="w-full flex flex-col justify-center items-center px-12 py-20 bg-[#171521]">
+    <div className="w-full flex flex-col justify-center items-center px-12 py-20 bg-[#171521] scroll-smooth" id="Roadmap">
       <div className="my-6 md:my-9 text-center flex flex-col gap-3">
         <h2
           className={`${source.className} antialiased text-5xl font-semibold bg-gradient-to-r from-[#64626C] to-[#EEEBF9] bg-clip-text text-transparent`}

@@ -6,7 +6,7 @@ import Footer from "../components/landing/Footer";
 
 export default function Home() {
   return (
-    <div className="bg-[#14121D]">
+    <div className="bg-[#14121D]" style={{ scrollBehavior: "smooth" }}>
       <Hero />
       <About />
       <Steps />

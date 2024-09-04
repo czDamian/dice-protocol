@@ -6,11 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 import { IoHandLeftOutline } from "react-icons/io5";
-<<<<<<< HEAD:components/landing/Faq.js
 import { source } from "../../app/fonts/fonts";
-=======
-import { source } from "../fonts/fonts";
->>>>>>> bddc4df5a6c85e6cd85a87961f6c147b0b41dcf6:app/landing/Faq.js
 
 const faq = [
   {
@@ -41,7 +37,10 @@ const faq = [
 ];
 export default function AccordionDemo() {
   return (
-    <div className="flex flex-col lg:flex-row justify-end items-center p-2 lg:p-12 my-6 gap-20">
+    <div
+      className="flex flex-col lg:flex-row justify-end items-center p-2 lg:p-12 my-6 gap-20"
+      id="FAQ"
+    >
       <div className=" w-[45ch] mx-16 text-center lg:text-left flex flex-col items-center lg:items-start">
         <h2
           className={`${source.className} bg-clip-text font-semibold antialiased bg-gradient-to-r from-[#45444a] to-[#EEEBF9] text-5xl my-3 leading-tight text-transparent mb-5`}
@@ -69,7 +68,7 @@ export default function AccordionDemo() {
             >
               {f.h}
             </AccordionTrigger>
-            <AccordionContent className="text-base md:text-lg">
+            <AccordionContent className="text-base md:text-lg  font-normal">
               {f.p}
             </AccordionContent>
           </AccordionItem>
