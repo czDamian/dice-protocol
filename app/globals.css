@@ -2,13 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  @apply m-0 p-0 box-border
+*{
+    @apply m-0 p-0 box-border;
 }
-body {
-  @apply bg-neutral-950 text-white;
+body{
+    @apply bg-neutral-950 text-white
 }
-@layer base {
+input, select, option, textarea{
+    @apply bg-inherit
+}@layer base {
   :root {
 
     --background: 0 0% 100%;
