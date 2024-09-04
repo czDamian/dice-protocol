@@ -33,7 +33,6 @@ export default function Hero() {
         <div className="flex flex-col lg:items-start items-center text-center lg:text-left justify-between w-[40ch] md:w-[60ch] text-base">
           <p className="mb-5 text-sm flex flex-row items-center">
             <FaRegStar className="mr-1" /> The most reliable voting dApp
-            <FaRegStar className="mr-1" /> The most reliable voting dApp
           </p>
           <h1
             className={` ${source.className} antialiased md:text-6xl text-5xl md:w-[20ch] font-semibold my-8 bg-gradient-to-r from-[#64626C] to-[#EEEBF9] bg-clip-text text-transparent`}
