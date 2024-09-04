@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 import { IoHandLeftOutline } from "react-icons/io5";
-import { source } from "../fonts/fonts";
+import { source } from "../../app/fonts/fonts";
 
 const faq = [
   {

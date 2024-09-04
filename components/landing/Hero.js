@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import Button from "../ui/Button";
+import Button from "../../app/ui/Button";
 import Link from "next/link";
 import Nav, { MobileNav } from "./Nav";
-import { source } from "../fonts/fonts";
+import { source } from "../../app/fonts/fonts";
 import { FaRegStar } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
 import clsx from "clsx";
@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <div
       className="bg-no-repeat bg-cover w-screen"
-      style={{ backgroundImage: "url('/bg.png')",}}
+      style={{ backgroundImage: "url('/bg.png')" }}
     >
       <Nav />
       <Link href="./" className="absolute left-[6%] top-[5%] md:block hidden">
