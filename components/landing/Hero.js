@@ -6,8 +6,6 @@ import Nav, { MobileNav } from "./Nav";
 import { source } from "../../app/fonts/fonts";
 import { FaRegStar } from "react-icons/fa";
 import { RiMenu2Fill } from "react-icons/ri";
-import clsx from "clsx";
-import { useState } from "react";
 
 export default function Hero() {
   return (
@@ -34,6 +32,7 @@ export default function Hero() {
       <div className=" lg:p-20 md:pt-[15%] pt-[25%] mx-auto flex flex-col lg:flex-row justify-evenly items-center text-stone-300 overflow-hidden">
         <div className="flex flex-col lg:items-start items-center text-center lg:text-left justify-between w-[40ch] md:w-[60ch] text-base">
           <p className="mb-5 text-sm flex flex-row items-center">
+            <FaRegStar className="mr-1" /> The most reliable voting dApp
             <FaRegStar className="mr-1" /> The most reliable voting dApp
           </p>
           <h1

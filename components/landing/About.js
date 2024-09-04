@@ -1,7 +1,14 @@
+<<<<<<< HEAD:components/landing/About.js
 import { source } from "../../app/fonts/fonts";
 import Image from "next/image";
 import React from "react";
 import Button from "../../app/ui/Button";
+=======
+import { source } from "../fonts/fonts";
+import Image from "next/image";
+import React from "react";
+import Button from "../ui/Button";
+>>>>>>> bddc4df5a6c85e6cd85a87961f6c147b0b41dcf6:app/landing/About.js
 
 const feats = [
   {
