@@ -121,3 +121,55 @@ export async function GET(request) {
     }
   }
 }
+
+// app/api/create-organization/route.js
+//PUT /api/create-organization?id=123 to update
+export async function PUT(request) {
+  const url = new URL(request.url);
+  const id = url.searchParams.get('id');
+  const { imgLink, name, description, owner } = await request.json();
+
+  if (!id || !imgLink || !name || !description || !owner) {
+    return NextResponse.json(
+      {
+        error: "All fields are required",
+      },
+      { status: 400 }
+    );
+  }
+
+  try {
+    if (name.length < 2) {
+      return NextResponse.json(
+        { error: "Organization name is too short" },
+        { status: 400 }
+      );
+    }
+
+    let organization = await Organization.findById(id);
+    if (!organization) {
+      return NextResponse.json(
+        { error: "Organization not found" },
+        { status: 404 }
+      );
+    }
+
+    organization.imgLink = imgLink;
+    organization.name = name;
+    organization.description = description;
+    organization.owner = owner;
+
+    await organization.save();
+
+    return NextResponse.json(
+      { message: "Organization updated successfully", organization },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("Error updating organization:", err);
+    return NextResponse.json(
+      { error: "Internal Server Error", message: err.message },
+      { status: 500 }
+    );
+  }
+}
